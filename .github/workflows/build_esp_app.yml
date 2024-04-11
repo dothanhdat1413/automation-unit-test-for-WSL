@@ -20,7 +20,7 @@ jobs:
       - name: Build Test Application with ESP-IDF
         uses: espressif/esp-idf-ci-action@v1
         with:
-          esp_idf_version: "latest" # latest is the default version
+          esp_idf_version: "v5.1.2" #current version Airsense run on 
           target: ${{ matrix.espidf_target }}
           path: 'test_app'
       - name: Upload files to artifacts for run-target job
