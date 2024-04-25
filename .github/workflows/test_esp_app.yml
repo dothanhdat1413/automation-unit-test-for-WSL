@@ -21,9 +21,9 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: test_app_bin_${{ matrix.espidf_target }}
-          path:
-            # test_app/build/
-            test_app_bin_${{ matrix.espidf_target }}
+          # path:
+          #   # test_app/build/
+          #   test_app_bin_${{ matrix.espidf_target }}
       - name: Install Python packages for PyTest
         env:
           PIP_PREFER_BINARY: true
