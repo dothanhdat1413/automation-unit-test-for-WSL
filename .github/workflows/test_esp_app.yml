@@ -6,9 +6,9 @@ on:
 jobs:
   run-target:
     name: Run Test App on target
-    runs-on: [self-hosted,Linux]  # (expects tags with the same name as espidf_target)
+    runs-on: [self-hosted,Pi5]  # (expects tags with the same name as espidf_target)
     container:
-      image: python:3.10
+      image: python:3.11-bullseye
       options: --privileged  # (privileged mode has access to serial ports)
     strategy:
       fail-fast: false
