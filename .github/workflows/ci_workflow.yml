@@ -13,7 +13,6 @@ jobs:
     uses: ./.github/workflows/build_esp_app.yml
 # Disable this job if you don't use it for hardware testing
   test_project:
-    if: ${{ github.repository_owner == 'espressif' }}  # Disable this job as default except if the repo is owned by Espressif
     name: Test Project
     uses: ./.github/workflows/test_esp_app.yml
     needs: build_project
