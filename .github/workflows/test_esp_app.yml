@@ -6,9 +6,9 @@ on:
 jobs:
   run-target:
     name: Run Test App on target
-    runs-on: [self-hosted,Linux]  # (expects tags with the same name as espidf_target)
+    runs-on: [self-hosted, Linux, Pi5, "${{ matrix.espidf_target }}"]  # (expects tags with the same name as espidf_target)
     container:
-      image: python:3.8
+      image: python:3.9-bullseye
       options: --privileged  # (privileged mode has access to serial ports)
     strategy:
       fail-fast: false
@@ -16,14 +16,12 @@ jobs:
         espidf_target: ["esp32", "esp32c3", "esp32s2", "esp32s3"]  # <--- Specify a list of Espressif chips connected to your runner
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
       - name: Download files / artifacts from build job
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v2
         with:
           name: test_app_bin_${{ matrix.espidf_target }}
-          # path:
-          #   # test_app/build/
-          #   test_app_bin_${{ matrix.espidf_target }}
+          path: test_app/build
       - name: Install Python packages for PyTest
         env:
           PIP_PREFER_BINARY: true
@@ -41,7 +39,7 @@ jobs:
             --junit-xml=./test_app_results_${{ matrix.espidf_target }}.xml \
             --target=${{ matrix.espidf_target }}
       - name: Upload test results for publish-results job
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         if: always()
         with:
           name: test_app_results_${{ matrix.espidf_target }}
@@ -53,7 +51,7 @@ jobs:
     if: always()  # (run even if the previous steps have failed)
     steps:
       - name: Download Test results
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           path: test_results
       - name: Publish Test Results
