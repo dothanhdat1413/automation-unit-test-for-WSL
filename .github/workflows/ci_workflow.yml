@@ -1,10 +1,11 @@
 name: Build and Run Test Application Workflow
 
 on:
-  schedule:
-    - cron: '0 0 * * *' # (scheduled - once per day at midnight)
-  pull_request: # (for every push to Pull Request)
-    types: [opened, reopened, synchronize]
+  # schedule:
+  #   - cron: '0 0 * * *' # (scheduled - once per day at midnight)
+  # pull_request: # (for every push to Pull Request)
+  #   types: [opened, reopened, synchronize]
+  # temporarily off auto test 
   workflow_dispatch:  # (to start the workflow manually)
 
 jobs:
