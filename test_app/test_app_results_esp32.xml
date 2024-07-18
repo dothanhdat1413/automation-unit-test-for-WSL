@@ -1,1 +1,0 @@
-<testsuites><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="2" time="7.867" timestamp="2024-07-18T11:39:51.053599" hostname="DESKTOP-UAER5P8"><testcase group="testable" name="mean_of_empty" /><testcase group="testable" name="mean_of_vector" /></testsuite></testsuites>
