@@ -8,12 +8,12 @@ jobs:
     name: Run Test App on target
     runs-on: [self-hosted, Linux, Pi5, "${{ matrix.espidf_target }}"]  # (expects tags with the same name as espidf_target)
     container:
-      image: python:3.9-bullseye
+      image: python:3.11
       options: --privileged  # (privileged mode has access to serial ports)
     strategy:
       fail-fast: false
       matrix:
-        espidf_target: ["esp32", "esp32c3", "esp32s2", "esp32s3"]  # <--- Specify a list of Espressif chips connected to your runner
+        espidf_target: ["esp32"]  # <--- Specify a list of Espressif chips connected to your runner
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
