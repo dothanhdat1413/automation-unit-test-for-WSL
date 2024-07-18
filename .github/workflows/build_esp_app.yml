@@ -7,7 +7,7 @@ on:
 jobs:
   build:
     name: Build Test App
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-20.04
     strategy:
       fail-fast: false
       matrix:
@@ -23,6 +23,7 @@ jobs:
           esp_idf_version: "v5.1.2" #current version Airsense run on 
           target: ${{ matrix.espidf_target }}
           path: 'test_app'
+
       - name: Upload files to artifacts for run-target job
         uses: actions/upload-artifact@v4
         with:
