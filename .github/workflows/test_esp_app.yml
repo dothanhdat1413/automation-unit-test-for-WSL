@@ -6,7 +6,7 @@ on:
 jobs:
   run-target:
     name: Run Test App on target
-    runs-on: [self-hosted, Linux]  # (expects tags with the same name as espidf_target)
+    runs-on: [self-hosted, Linux]
     container:
       image: python:3.11
       options: --privileged  # (privileged mode has access to serial ports)
@@ -20,7 +20,7 @@ jobs:
       - name: Download files / artifacts from build job
         uses: actions/download-artifact@v2
         with:
-          name: test_app_bin_${{ matrix.espidf_target }}
+          name: test_app_bin_esp32
           path: test_app/build
       - name: Install Python packages for PyTest
         env:
@@ -47,7 +47,7 @@ jobs:
   publish-results:
     name: Publish Test App results
     needs: run-target
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     if: always()  # (run even if the previous steps have failed)
     steps:
       - name: Download Test results
